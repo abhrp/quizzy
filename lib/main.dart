@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import './quiz.dart';
+import './result.dart';
 
 void main() => runApp(QuizzyApp());
 
@@ -15,23 +16,41 @@ class _QuizzyState extends State<QuizzyApp> {
   final _questions = const [
     {
       'question': 'What\'s your favorite color?',
-      'answers': ['Black', 'Red', 'Green', 'White']
+      'answers': [
+        {'text': 'Black', 'score': 10},
+        {'text': 'Red', 'score': 8},
+        {'text': 'Green', 'score': 5},
+        {'text': 'White', 'score': 2}
+      ]
     },
     {
       'question': 'What\'s your favorite animal?',
-      'answers': ['Elephant', 'Tiger', 'Lion', 'Leopard']
+      'answers': [
+        {'text': 'Elephant', 'score': 20},
+        {'text': 'Tiger', 'score': 30},
+        {'text': 'Lion', 'score': 50},
+        {'text': 'Leopard', 'score': 25}
+      ]
     },
     {
       'question': 'What\'s your favorite ice-cream?',
-      'answers': ['Vanilla', 'Butterscotch', 'Chocolate', 'Caramel']
+      'answers': [
+        {'text': 'Vanilla', 'score': 5},
+        {'text': 'Butterscotch', 'score': 10},
+        {'text': 'Chocolate', 'score': 20},
+        {'text': 'Caramel', 'score': 40}
+      ]
     }
   ];
   var _questionIndex = 0;
+  var _totalScore = 0;
 
-  void _answerClicked() {
+  void _answerClicked(int score) {
     setState(() {
       _questionIndex += 1;
     });
+    _totalScore += score;
+    print(_totalScore);
   }
 
   @override
@@ -44,9 +63,7 @@ class _QuizzyState extends State<QuizzyApp> {
                 question: _questions[_questionIndex]['question'],
                 answers: _questions[_questionIndex]['answers'],
                 clicked: _answerClicked)
-            : Center(
-                child: Text('You did it!'),
-              ), //Column
+            : Result(_totalScore),
       ), //Scaffold
     ); //MaterialApp
   }
