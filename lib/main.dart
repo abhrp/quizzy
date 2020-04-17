@@ -17,27 +17,36 @@ class _QuizzyState extends State<QuizzyApp> {
 
   void _answerClicked() {
     setState(() {
-      if (_questionIndex < 1) {
-        _questionIndex += 1;
-      }
+      _questionIndex += 1;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    var questions = [
-      "What\'s your favorite color?",
-      "What\'s your favorite animal?",
+    const questions = [
+      {
+        'question': 'What\'s your favorite color?',
+        'answers': ['Black', 'Red', 'Green', 'White']
+      },
+      {
+        'question': 'What\'s your favorite animal?',
+        'answers': ['Elephant', 'Tiger', 'Lion', 'Leopard']
+      },
+      {
+        'question': 'What\'s your favorite ice-cream?',
+        'answers': ['Vanilla', 'Butterscotch', 'Chocolate', 'Caramel']
+      }
     ];
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(title: Text('Quizzy')), //Appbar
         body: Column(
           children: [
-            Question(questions[_questionIndex]),
-            Answer(_answerClicked),
-            Answer(_answerClicked),
-            Answer(_answerClicked),
+            Question(questions[_questionIndex]['question']),
+            ...(questions[_questionIndex]['answers'] as List<String>)
+                .map((answer) {
+              return Answer(_answerClicked, answer);
+            }).toList()
           ],
         ), //Column
       ), //Scaffold
