@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import './question.dart';
+
 void main() => runApp(QuizzyApp());
 
 class QuizzyApp extends StatefulWidget {
@@ -10,15 +12,14 @@ class QuizzyApp extends StatefulWidget {
 }
 
 class QuizzyState extends State<QuizzyApp> {
-  var questionIndex = 0;
+  var _questionIndex = 0;
 
   void answerClicked() {
     setState(() {
-      if (questionIndex < 1) {
-        questionIndex += 1;
+      if (_questionIndex < 1) {
+        _questionIndex += 1;
       }
     });
-    print(questionIndex);
   }
 
   @override
@@ -32,7 +33,7 @@ class QuizzyState extends State<QuizzyApp> {
         appBar: AppBar(title: Text('Quizzy')), //Appbar
         body: Column(
           children: [
-            Text(questions[questionIndex]),
+            Question(questions[_questionIndex]),
             RaisedButton(
               child: Text('Answer 1'),
               onPressed: answerClicked,
