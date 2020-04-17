@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import './answer.dart';
 import './question.dart';
 
 void main() => runApp(QuizzyApp());
@@ -7,14 +8,14 @@ void main() => runApp(QuizzyApp());
 class QuizzyApp extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return QuizzyState();
+    return _QuizzyState();
   }
 }
 
-class QuizzyState extends State<QuizzyApp> {
+class _QuizzyState extends State<QuizzyApp> {
   var _questionIndex = 0;
 
-  void answerClicked() {
+  void _answerClicked() {
     setState(() {
       if (_questionIndex < 1) {
         _questionIndex += 1;
@@ -34,20 +35,9 @@ class QuizzyState extends State<QuizzyApp> {
         body: Column(
           children: [
             Question(questions[_questionIndex]),
-            RaisedButton(
-              child: Text('Answer 1'),
-              onPressed: answerClicked,
-            ),
-            RaisedButton(
-              child: Text('Answer 2'),
-              onPressed: () => print('Answer 2 clicked'),
-            ),
-            RaisedButton(
-              child: Text('Answer 3'),
-              onPressed: () {
-                print('Answer 3 clicked');
-              },
-            ),
+            Answer(_answerClicked),
+            Answer(_answerClicked),
+            Answer(_answerClicked),
           ],
         ), //Column
       ), //Scaffold
