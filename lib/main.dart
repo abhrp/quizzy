@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import './answer.dart';
-import './question.dart';
+import './quiz.dart';
 
 void main() => runApp(QuizzyApp());
 
@@ -13,7 +12,7 @@ class QuizzyApp extends StatefulWidget {
 }
 
 class _QuizzyState extends State<QuizzyApp> {
-  final questions = const [
+  final _questions = const [
     {
       'question': 'What\'s your favorite color?',
       'answers': ['Black', 'Red', 'Green', 'White']
@@ -40,16 +39,11 @@ class _QuizzyState extends State<QuizzyApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(title: Text('Quizzy')), //Appbar
-        body: _questionIndex < questions.length
-            ? Column(
-                children: [
-                  Question(questions[_questionIndex]['question']),
-                  ...(questions[_questionIndex]['answers'] as List<String>)
-                      .map((answer) {
-                    return Answer(_answerClicked, answer);
-                  }).toList()
-                ],
-              )
+        body: _questionIndex < _questions.length
+            ? Quiz(
+                question: _questions[_questionIndex]['question'],
+                answers: _questions[_questionIndex]['answers'],
+                clicked: _answerClicked)
             : Center(
                 child: Text('You did it!'),
               ), //Column
