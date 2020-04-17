@@ -53,6 +53,13 @@ class _QuizzyState extends State<QuizzyApp> {
     print(_totalScore);
   }
 
+  void _restartQuiz() {
+    setState(() {
+      _questionIndex = 0;
+      _totalScore = 0;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -63,7 +70,7 @@ class _QuizzyState extends State<QuizzyApp> {
                 question: _questions[_questionIndex]['question'],
                 answers: _questions[_questionIndex]['answers'],
                 clicked: _answerClicked)
-            : Result(_totalScore),
+            : Result(_totalScore, _restartQuiz),
       ), //Scaffold
     ); //MaterialApp
   }
