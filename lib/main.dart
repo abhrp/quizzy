@@ -42,17 +42,17 @@ class _QuizzyState extends State<QuizzyApp> {
         appBar: AppBar(title: Text('Quizzy')), //Appbar
         body: _questionIndex < questions.length
             ? Column(
-          children: [
-            Question(questions[_questionIndex]['question']),
-            ...(questions[_questionIndex]['answers'] as List<String>)
-                .map((answer) {
-              return Answer(_answerClicked, answer);
-            }).toList()
-          ],
-        )
+                children: [
+                  Question(questions[_questionIndex]['question']),
+                  ...(questions[_questionIndex]['answers'] as List<String>)
+                      .map((answer) {
+                    return Answer(_answerClicked, answer);
+                  }).toList()
+                ],
+              )
             : Center(
-          child: Text('You did it!'),
-        ), //Column
+                child: Text('You did it!'),
+              ), //Column
       ), //Scaffold
     ); //MaterialApp
   }
